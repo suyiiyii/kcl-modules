@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "**.mod"
+      - "**/*.mod"
 
 env:
   KPM_REG: "docker.io"
