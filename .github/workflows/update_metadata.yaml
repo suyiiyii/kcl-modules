@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "**/*.mod"
 
 env:
   KPM_REG: "docker.io"
