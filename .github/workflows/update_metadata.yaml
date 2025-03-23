@@ -31,10 +31,6 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-
-      - name: Login
-        run: kcl registry login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v41
@@ -49,7 +45,6 @@ jobs:
 
       - name: Publish to ghcr.io
         run: |
-          kcl registry login -u ${{ secrets.DEPLOY_ACCESS_NAME }} -p ${{ secrets.DEPLOY_ACCESS_TOKEN }} ghcr.io
           if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q 'kcl.mod'; then
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               ./scripts/push_pkg_from.sh $file
